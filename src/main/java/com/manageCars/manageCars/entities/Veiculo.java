@@ -6,77 +6,70 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Veiculo extends Cliente implements Serializable {
+public class Veiculo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String  marca;
+	private String marca;
 	private String modelo;
-	private String  placa;
-	
-	
-	
-	/* construtores*/
+	private String placa;
+
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
+
+	/* construtores */
 	public Veiculo() {
-		
+
 	}
 
-
 	public Veiculo(Long id, String nome, Long id2, String marca, String modelo, String placa) {
-		super(id, nome);
+
 		id = id2;
 		this.marca = marca;
 		this.modelo = modelo;
 		this.placa = placa;
 	}
 
-
-	
-	/*getters and setters*/
+	/* getters and setters */
 	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
 	public String getMarca() {
 		return marca;
 	}
-
 
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
 
-
 	public String getModelo() {
 		return modelo;
 	}
-
 
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
 
-
 	public String getPlaca() {
 		return placa;
 	}
 
-
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -87,8 +80,7 @@ public class Veiculo extends Cliente implements Serializable {
 		return result;
 	}
 
-	
-	/*hashCode*/
+	/* hashCode */
 
 	@Override
 	public boolean equals(Object obj) {
@@ -112,13 +104,4 @@ public class Veiculo extends Cliente implements Serializable {
 		return true;
 	}
 
-
-	
-	
-	
-
-	}
-	
-	
-
-
+}

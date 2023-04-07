@@ -1,28 +1,40 @@
 package com.manageCars.manageCars.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
 @Entity
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_usuario;
 	private String usuario;
 	private String senha;
-	
-	
-	/*constructors*/
-	public Usuario() {
-		
-	}
 
+	@JsonIgnore
+	@OneToMany(mappedBy = "usuario")
+	private List<Servico> servico = new ArrayList<>();
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "usuario")
+	private List<Produto> produto = new ArrayList<>();
+
+	/* constructors */
+	public Usuario() {
+
+	}
 
 	public Usuario(Long id_usuario, String usuario, String senha) {
 		super();
@@ -31,36 +43,29 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-
 	public Long getId_usuario() {
 		return id_usuario;
 	}
-
 
 	public void setId_usuario(Long id_usuario) {
 		this.id_usuario = id_usuario;
 	}
 
-
 	public String getUsuario() {
 		return usuario;
 	}
-
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
 
-
 	public String getSenha() {
 		return senha;
 	}
 
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -69,7 +74,6 @@ public class Usuario implements Serializable {
 		result = prime * result + ((id_usuario == null) ? 0 : id_usuario.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -87,8 +91,5 @@ public class Usuario implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }

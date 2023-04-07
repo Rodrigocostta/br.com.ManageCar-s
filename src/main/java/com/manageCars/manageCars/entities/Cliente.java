@@ -1,11 +1,16 @@
 package com.manageCars.manageCars.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Cliente implements Serializable {
@@ -13,9 +18,17 @@ public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente")
+	private List<Contato> contato = new ArrayList<>();
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente")
+	private List<Veiculo> veiculo = new ArrayList<>();
 
 	/* Construtores */
 	public Cliente() {

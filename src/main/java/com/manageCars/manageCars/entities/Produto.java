@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Produto implements Serializable {
@@ -16,6 +18,10 @@ public class Produto implements Serializable {
 	private Long id;
 	private String descricao;
 	private Double custo;
+
+	@ManyToOne
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
 
 	/* construtores */
 	public Produto() {
