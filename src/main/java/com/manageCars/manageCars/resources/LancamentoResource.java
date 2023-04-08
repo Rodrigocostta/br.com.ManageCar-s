@@ -13,7 +13,7 @@ import com.manageCars.manageCars.entities.Lancamento;
 import com.manageCars.manageCars.servicies.LancamentoService;
 
 @RestController
-@RequestMapping(value = "lancamento")
+@RequestMapping(value = "/lancamento")
 public class LancamentoResource {
 
 	@Autowired

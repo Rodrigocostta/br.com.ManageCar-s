@@ -1,4 +1,4 @@
-package com.manageCars.manageCars.Enus;
+package com.manageCars.manageCars.Enuns;
 
 public enum LancamentoStatus {
 

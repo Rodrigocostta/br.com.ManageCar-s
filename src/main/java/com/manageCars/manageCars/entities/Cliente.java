@@ -2,7 +2,9 @@ package com.manageCars.manageCars.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -10,6 +12,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -22,13 +27,21 @@ public class Cliente implements Serializable {
 	private Long id;
 	private String nome;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "cliente")
-	private List<Contato> contato = new ArrayList<>();
+	/*
+	 * Essa anotação cria uma tabel de relação entre as duas tabelas. repare que
+	 * cliente_id e servico_id são definidos na notação de @JOINTABlE
+	 */
+	@ManyToMany
+	@JoinTable(name = "servicoCliente", joinColumns = @JoinColumn(name = "cliente_id"), inverseJoinColumns = @JoinColumn(name = "servico_id"))
+	private Set<Servico> servicos = new HashSet<>();
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
-	private List<Veiculo> veiculo = new ArrayList<>();
+	private List<Contato> contatos = new ArrayList<>();
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente")
+	private List<Veiculo> veiculos = new ArrayList<>();
 
 	/* Construtores */
 	public Cliente() {
@@ -40,6 +53,7 @@ public class Cliente implements Serializable {
 		this.id = id;
 		this.nome = nome;
 	}
+
 
 	/* getters and setters */
 	public Long getId() {
@@ -56,6 +70,31 @@ public class Cliente implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	
+	public Set<Servico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(Set<Servico> servicos) {
+		this.servicos = servicos;
+	}
+
+	public List<Contato> getContatos() {
+		return contatos;
+	}
+
+	public void setContato(List<Contato> contatos) {
+		this.contatos = contatos;
+	}
+
+	public List<Veiculo> getVeiculos() {
+		return veiculos;
+	}
+
+	public void setVeiculos(List<Veiculo> veiculos) {
+		this.veiculos = veiculos;
 	}
 
 	@Override

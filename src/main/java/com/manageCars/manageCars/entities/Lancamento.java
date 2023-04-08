@@ -1,16 +1,23 @@
 package com.manageCars.manageCars.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
-import com.manageCars.manageCars.Enus.LancamentoStatus;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.manageCars.manageCars.Enuns.FormaPagamento;
+import com.manageCars.manageCars.Enuns.LancamentoStatus;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Lancamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -20,17 +27,21 @@ public class Lancamento implements Serializable {
 	private Long id;
 	private String descricao;
 	private String categoria;
-	private Instant data;
+
+	@CreatedDate
+	@Column(nullable = false, updatable = false)
+	private LocalDateTime data;
 	private Double valor;
 	private int lancamentoStatus;
+	private int formaDePagamento;
 
 	/* Construtores */
 	public Lancamento() {
 
 	}
 
-	public Lancamento(Long id, String descricao, String categoria, Instant data, Double valor,
-			LancamentoStatus lancamentoStatus) {
+	public Lancamento(Long id, String descricao, String categoria, LocalDateTime data, Double valor,
+			LancamentoStatus lancamentoStatus, FormaPagamento formaDePagamento) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -38,6 +49,8 @@ public class Lancamento implements Serializable {
 		this.data = data;
 		this.valor = valor;
 		setLancamentoStatus(lancamentoStatus);
+		setFormaDePagamento(formaDePagamento);
+
 	}
 
 	/* gatters ande setters */
@@ -65,11 +78,11 @@ public class Lancamento implements Serializable {
 		this.categoria = categoria;
 	}
 
-	public Instant getData() {
+	public LocalDateTime getData() {
 		return data;
 	}
 
-	public void setData(Instant data) {
+	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
 
@@ -88,6 +101,16 @@ public class Lancamento implements Serializable {
 	public void setLancamentoStatus(LancamentoStatus lancamentoStatus) {
 		if (lancamentoStatus != null) {
 			this.lancamentoStatus = lancamentoStatus.getCode();
+		}
+	}
+
+	public FormaPagamento getFormaDePagamento() {
+		return FormaPagamento.valueOf(formaDePagamento);
+	}
+
+	public void setFormaDePagamento(FormaPagamento formaDePagamento) {
+		if (formaDePagamento != null) {
+			this.formaDePagamento = formaDePagamento.getCode2();
 		}
 	}
 

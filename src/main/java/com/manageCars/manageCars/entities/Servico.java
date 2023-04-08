@@ -1,12 +1,15 @@
 package com.manageCars.manageCars.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -18,6 +21,11 @@ public class Servico implements Serializable {
 	private Long id;
 	private String descricao;
 	private Double valor;
+	
+	
+	/*Desse lao carregamos somente o ponteiro que relaciona as entidades*/
+	@ManyToMany(mappedBy = "servicos")
+	private Set<Cliente> clientes = new HashSet<>();
 
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
