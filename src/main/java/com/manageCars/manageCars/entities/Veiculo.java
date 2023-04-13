@@ -30,13 +30,18 @@ public class Veiculo implements Serializable {
 
 	}
 
-	public Veiculo(Long id, String nome, Long id2, String marca, String modelo, String placa) {
 
-		id = id2;
+
+	public Veiculo(Long id, String marca, String modelo, String placa, Cliente cliente) {
+		super();
+		this.id = id;
 		this.marca = marca;
 		this.modelo = modelo;
 		this.placa = placa;
+		this.cliente = cliente;
 	}
+
+
 
 	/* getters and setters */
 	public Long getId() {

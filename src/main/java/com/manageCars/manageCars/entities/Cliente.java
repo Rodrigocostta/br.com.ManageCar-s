@@ -35,11 +35,9 @@ public class Cliente implements Serializable {
 	@JoinTable(name = "servicoCliente", joinColumns = @JoinColumn(name = "cliente_id"), inverseJoinColumns = @JoinColumn(name = "servico_id"))
 	private Set<Servico> servicos = new HashSet<>();
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Contato> contatos = new ArrayList<>();
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Veiculo> veiculos = new ArrayList<>();
 
@@ -53,7 +51,6 @@ public class Cliente implements Serializable {
 		this.id = id;
 		this.nome = nome;
 	}
-
 
 	/* getters and setters */
 	public Long getId() {
@@ -71,8 +68,8 @@ public class Cliente implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
+
+	@JsonIgnore
 	public Set<Servico> getServicos() {
 		return servicos;
 	}
@@ -81,6 +78,7 @@ public class Cliente implements Serializable {
 		this.servicos = servicos;
 	}
 
+	
 	public List<Contato> getContatos() {
 		return contatos;
 	}
@@ -89,6 +87,7 @@ public class Cliente implements Serializable {
 		this.contatos = contatos;
 	}
 
+	@JsonIgnore
 	public List<Veiculo> getVeiculos() {
 		return veiculos;
 	}

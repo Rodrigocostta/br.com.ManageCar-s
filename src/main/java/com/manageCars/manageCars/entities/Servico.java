@@ -4,13 +4,15 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Servico implements Serializable {
@@ -21,16 +23,16 @@ public class Servico implements Serializable {
 	private Long id;
 	private String descricao;
 	private Double valor;
-	
-	
-	/*Desse lao carregamos somente o ponteiro que relaciona as entidades*/
-	@ManyToMany(mappedBy = "servicos")
-	private Set<Cliente> clientes = new HashSet<>();
+
+	@OneToMany(mappedBy = "id.servico")
+	private Set<OrdemServico> servico = new HashSet<>();
+
+	/* Desse lao carregamos somente o ponteiro que relaciona as entidades */
 
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
-
+	
 	/* Construtores */
 	public Servico() {
 
@@ -66,6 +68,11 @@ public class Servico implements Serializable {
 
 	public void setValor(Double valor) {
 		this.valor = valor;
+	}
+
+	@JsonIgnore
+	public Set<OrdemServico> getOrdemServico() {
+		return servico;
 	}
 
 	@Override

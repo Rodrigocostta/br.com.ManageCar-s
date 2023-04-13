@@ -30,14 +30,20 @@ public class Contato implements Serializable {
 		
 	}
 
-	public Contato(Long id, Integer telefone, String email) {
+
+
+	
+	public Contato(Long id, Integer telefone, String email, Cliente cliente) {
 		super();
 		this.id = id;
 		this.telefone = telefone;
 		this.email = email;
+		this.cliente = cliente;
 	}
 
-	
+
+
+
 	/*getteres and setters*/
 	public Long getId() {
 		return id;

@@ -15,11 +15,14 @@ public class OrdemServico implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private OrdemServicoPK id;
+	private OrdemServicoPK id = new OrdemServicoPK();
 	private Integer formaDePagamento;
 	private Double valorTotal;
 
 	/* Constructros */
+	public OrdemServico() {
+
+	}
 
 	public OrdemServico(Cliente cliente, Veiculo veiculo, Servico servico, FormaPagamento formaDePagamento,
 			Double valorTotal) {
@@ -83,7 +86,6 @@ public class OrdemServico implements Serializable {
 	}
 
 	/* hashCodes */
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -108,5 +110,4 @@ public class OrdemServico implements Serializable {
 			return false;
 		return true;
 	}
-
 }
