@@ -8,31 +8,27 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+
 @Entity
 public class Contato implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Integer telefone;
 	private String email;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
-	private  Cliente cliente;
-	
-	
-	
-	/*Constructores */
+	private Cliente cliente;
+
+	/* Constructores */
 	public Contato() {
-		
+
 	}
 
-
-
-	
 	public Contato(Long id, Integer telefone, String email, Cliente cliente) {
 		super();
 		this.id = id;
@@ -41,10 +37,7 @@ public class Contato implements Serializable {
 		this.cliente = cliente;
 	}
 
-
-
-
-	/*getteres and setters*/
+	/* getteres and setters */
 	public Long getId() {
 		return id;
 	}
@@ -67,6 +60,14 @@ public class Contato implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	@Override
@@ -93,10 +94,5 @@ public class Contato implements Serializable {
 			return false;
 		return true;
 	}
-	
-
-	
-	
-	
 
 }

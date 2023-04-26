@@ -30,8 +30,6 @@ public class Veiculo implements Serializable {
 
 	}
 
-
-
 	public Veiculo(Long id, String marca, String modelo, String placa, Cliente cliente) {
 		super();
 		this.id = id;
@@ -40,8 +38,6 @@ public class Veiculo implements Serializable {
 		this.placa = placa;
 		this.cliente = cliente;
 	}
-
-
 
 	/* getters and setters */
 	public Long getId() {
@@ -74,6 +70,14 @@ public class Veiculo implements Serializable {
 
 	public void setPlaca(String placa) {
 		this.placa = placa;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	@Override

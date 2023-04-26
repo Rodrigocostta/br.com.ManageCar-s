@@ -14,17 +14,40 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repository;
 
-	/* Listar todos */
+	/* listar todos */
+
 	public List<Usuario> findAll() {
 		return repository.findAll();
-
 	}
 
-	/* Listra por id */
+	/* Buscando com parametro */
 	public Usuario findById(long id) {
 
 		Optional<Usuario> obj = repository.findById(id);
 		return obj.get();
+	}
+
+	// INSERT
+	public Usuario insert(Usuario obj) {
+		return repository.save(obj);
+	}
+
+	// DELETE
+	public void delete(Long id) {
+		repository.deleteById(id);
+
+	}
+
+	public Usuario update(Long id, Usuario obj) {
+		Usuario entity = repository.getReferenceById(id);
+		updateDate(entity, obj);
+		return repository.save(entity);
+	}
+
+	private void updateDate(Usuario entity, Usuario obj) {
+		entity.setUsuario(obj.getUsuario());
+		entity.setSenha(obj.getSenha());
+
 	}
 
 }

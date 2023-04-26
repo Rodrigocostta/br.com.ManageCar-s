@@ -16,15 +16,39 @@ public class ContatoService {
 	private ContatoRepository repository;
 
 	/* listar todos */
-	public List<Contato> findAll() {
 
+	public List<Contato> findAll() {
 		return repository.findAll();
 	}
 
-	/* Listar especifico por id */
+	/* Buscando com parametro */
 	public Contato findById(long id) {
 
 		Optional<Contato> obj = repository.findById(id);
 		return obj.get();
+	}
+
+	// INSERT
+	public Contato insert(Contato obj) {
+		return repository.save(obj);
+	}
+
+	// DELETE
+	public void delete(Long id) {
+		repository.deleteById(id);
+
+	}
+
+	public Contato update(Long id, Contato obj) {
+		Contato entity = repository.getReferenceById(id);
+		updateDate(entity, obj);
+		return repository.save(entity);
+	}
+
+	private void updateDate(Contato entity, Contato obj) {
+		entity.setCliente(obj.getCliente());
+		entity.setEmail(obj.getEmail());
+		entity.setTelefone(obj.getTelefone());
+
 	}
 }

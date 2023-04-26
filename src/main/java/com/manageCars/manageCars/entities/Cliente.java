@@ -78,7 +78,7 @@ public class Cliente implements Serializable {
 		this.servicos = servicos;
 	}
 
-	
+	@JsonIgnore
 	public List<Contato> getContatos() {
 		return contatos;
 	}

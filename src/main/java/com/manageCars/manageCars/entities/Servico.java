@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,7 +30,7 @@ public class Servico implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
-	
+
 	/* Construtores */
 	public Servico() {
 
@@ -68,11 +66,6 @@ public class Servico implements Serializable {
 
 	public void setValor(Double valor) {
 		this.valor = valor;
-	}
-
-	@JsonIgnore
-	public Set<OrdemServico> getOrdemServico() {
-		return servico;
 	}
 
 	@Override

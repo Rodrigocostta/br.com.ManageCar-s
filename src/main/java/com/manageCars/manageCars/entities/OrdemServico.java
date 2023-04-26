@@ -39,8 +39,9 @@ public class OrdemServico implements Serializable {
 		return id.getCliente();
 	}
 
-	public void setCliente(Veiculo veiculo) {
-		id.setVeiculo(veiculo);
+	public void setCliente
+	(Cliente cliente) {
+		id.setCliente(cliente);
 	}
 
 	public Servico getServico() {
@@ -55,8 +56,8 @@ public class OrdemServico implements Serializable {
 		return id.getVeiculo();
 	}
 
-	public void setVeiculo(Cliente cliente) {
-		id.setCliente(cliente);
+	public void setVeiculo(Veiculo veiculo) {
+		id.setVeiculo(veiculo);
 	}
 
 	public FormaPagamento getFormaDePagamento() {
@@ -84,6 +85,11 @@ public class OrdemServico implements Serializable {
 	public void setId(OrdemServicoPK id) {
 		this.id = id;
 	}
+
+	public Double getSubTotal() {
+		return getValorTotal();
+	}
+	
 
 	/* hashCodes */
 	@Override
